@@ -55,7 +55,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["1", True, False, ["3", "2"]],
             ["2", False, False, ["0", "4"]],
             ["3", False, False, ["5", "0"]],
-            ["4", True, True, ["6", "0"]],
+            ["4", True, False, ["6", "0"]],
             ["5", False, True, ["0", "0"]],
             ["6", True, True, ["0", "0"]]
         ]
@@ -64,7 +64,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["1", True, False, ["3", "2"]],
             ["2", False, False, ["0", "4"]],
             ["3", False, False, ["5", "0"]],
-            ["4", True, True, ["6", "0"]],
+            ["4", True, False, ["6", "0"]],
             ["5", False, True, ["0", "0"]],
             ["6", True, True, ["0", "0"]]
         ]
@@ -180,6 +180,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["8", False, True, ["0", "0"]],
             ["9", False, True, ["0", "10"]],
             ["10", True, True, ["11", "12"]],
+            ["11", False, True, ["0", "0"]],
             ["12", False, True, ["13", "0"]],
             ["13", True, True, ["0", "0"]]
         ]
@@ -195,6 +196,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["8", False, True, ["0", "0"]],
             ["9", False, True, ["0", "10"]],
             ["10", True, True, ["11", "12"]],
+            ["11", False, True, ["0", "0"]],
             ["12", False, True, ["13", "0"]],
             ["13", True, True, ["0", "0"]]
         ]
@@ -386,7 +388,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["8", True, False, ["16", "17"]],
             ["9", True, False, ["18", "19"]],
             ["10", False, True, ["20", "21"]],
-            ["11", True, True, ["22", "23"]],
+            ["11", True, False, ["22", "23"]],
             ["12", False, True, ["24", "25"]],
             ["13", False, True, ["26", "27"]],
             ["14", True, True, ["28", "29"]],
@@ -402,7 +404,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["24", True, True, ["0", "0"]],
             ["25", False, True, ["0", "0"]],
             ["26", True, True, ["0", "0"]],
-            ["27", False, True, ["0", "0"]],
+            ["27", False, False, ["0", "0"]],
             ["28", False, True, ["0", "0"]],
             ["29", False, True, ["38", "39"]],
             ["30", True, True, ["40", "41"]],
@@ -434,7 +436,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["8", True, False, ["16", "17"]],
             ["9", True, False, ["18", "19"]],
             ["10", False, True, ["20", "21"]],
-            ["11", True, True, ["22", "23"]],
+            ["11", True, False, ["22", "23"]],
             ["12", False, True, ["24", "25"]],
             ["13", False, True, ["26", "27"]],
             ["14", True, True, ["28", "29"]],
@@ -450,7 +452,7 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
             ["24", True, True, ["0", "0"]],
             ["25", False, True, ["0", "0"]],
             ["26", True, True, ["0", "0"]],
-            ["27", False, True, ["0", "0"]],
+            ["27", False, False, ["0", "0"]],
             ["28", False, True, ["0", "0"]],
             ["29", False, True, ["38", "39"]],
             ["30", True, True, ["40", "41"]],
@@ -475,8 +477,8 @@ class TestEmparejarBonsaiAhorro(unittest.TestCase):
         respuesta_estudiante = dccortaramas.emparejar_bonsai_ahorro(bonsai)
         estructura_estudiante = bonsai.estructura
         respuestas = [
-            [True, 28, [['Modificar Flor', '27'], ['Modificar Flor', '12']]],
-            [True, 28, [['Modificar Flor', '12'], ['Modificar Flor', '27']]]
+            [True, 28, [['Modificar Flor', '20'], ['Modificar Flor', '12']]],
+            [True, 28, [['Modificar Flor', '12'], ['Modificar Flor', '20']]]
         ]
 
         self.assertIn(respuesta_estudiante, respuestas)

@@ -1,5 +1,5 @@
 import dccortaramas
-import prettyprint
+import sys
 
 def opciones_inicio_menu():
     print("[1] Cargar bonsái\n[2] Salir del programa\nIndique su opción (1, 2):")
@@ -16,16 +16,35 @@ while v != 1:
     inicio_menu()
     opcion_persona= int(input("Ingresa un numero: "))
     if opcion_persona == 1:
-        nombre_carpeta= input("Ingresa el nombre de la carpeta: ")
-        nombre_archivo= input("Ingresa el nombre del archivo: ")
+        carpeta= input("Ingresa el nombre de la carpeta: ")
+        archivo= input("Ingresa el nombre del archivo: ")
         v= 1
         break
     elif opcion_persona == 2:
-         break
+        sys.exit()
+        v= 1
 
 while v != 0:
     segundo_menu()
     segunda_opcion_persona= int(input("Ingresa un numero: "))
+    clase_dcc= dccortaramas.DCCortaRamas()
+    clase_bonsai= dccortaramas.Bonsai("victor", 10, 27, [])
+
     if segunda_opcion_persona == 1:
-        clase_bonsai= dccortaramas.Bonsai()
-        clase_bonsai.visualizar_bonsai()
+        clase_bonsai.cargar_bonsai_de_archivo(carpeta, archivo)
+        clase_bonsai.visualizar_bonsai("Vertical", True, False)
+        sys.exit()
+    elif segunda_opcion_persona == 2:
+        clase_dcc.modificar_nodo(clase_bonsai, 3)
+        sys.exit()
+    elif segunda_opcion_persona == 3:
+        clase_dcc.quitar_nodo(clase_bonsai, "4")
+        sys.exit()
+
+    elif segunda_opcion_persona == 4:
+        clase_dcc.es_simetrico(clase_bonsai)
+        sys.exit()
+
+    elif segunda_opcion_persona == 6:
+        sys.exit()
+        v= 0

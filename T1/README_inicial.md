@@ -15,6 +15,9 @@ Un buen ```README.md``` no tiene por que ser muy extenso tampoco, hay que ser **
 con detalles de último minuto y consideraciones como por ejemplo cambiar algo
 en cierta línea del código o comentar una función>
 
+-mi main.py trata de visualizar y acomodar un bonsai de la forma que una persona externa quiera modificarlo.
+-la funcion modificar_nodo no funcniona correctamente y no hay mas funciones
+
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
 
 Explicación: mantén el emoji correspondiente, de manera honesta, para cada item. Si quieres, también puedes agregarlos a los títulos:
@@ -35,7 +38,7 @@ SINO QUE SE DEBERÁ EXPLICAR QUÉ SE REALIZO DETALLADAMENTE EN CADA ITEM.
 
 
 ## Ejecución :computer:
-El módulo principal de la tarea a ejecutar es  ```archivo.py```. Además se debe crear los siguientes archivos y directorios adicionales:
+El módulo principal de la tarea a ejecutar es  `main.py`. Además se debe crear los siguientes archivos y directorios adicionales:
 1. ```archivo.ext``` en ```ubicación```
 2. ```directorio``` en ```ubicación```
 3. ...
@@ -45,8 +48,8 @@ El módulo principal de la tarea a ejecutar es  ```archivo.py```. Además se deb
 ### Librerías externas utilizadas
 La lista de librerías externas que utilicé fue la siguiente:
 
-1. ```librería_1```: ```función() / módulo```
-2. ```librería_2```: ```función() / módulo``` (debe instalarse)
+1. `utilidades.pyc`: `visualizar_bonsai()`
+2. `dccortarama.py`: `todas las funciones` (lo importe en el main.py)
 3. ...
 
 ### Librerías propias

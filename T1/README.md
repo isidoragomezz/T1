@@ -1,4 +1,4 @@
-# Tarea X: Nombre de la tarea :school_satchel:
+# Tarea 1: DCCortaRamas 🌳✂️
 
 
 Un buen ```README.md``` puede marcar una gran diferencia en la facilidad con la que corregimos una tarea, y consecuentemente cómo funciona su programa, por lo en general, entre más ordenado y limpio sea éste, mejor será 
@@ -15,19 +15,30 @@ Un buen ```README.md``` no tiene por que ser muy extenso tampoco, hay que ser **
 con detalles de último minuto y consideraciones como por ejemplo cambiar algo
 en cierta línea del código o comentar una función>
 
+-mi main.py trata de visualizar y acomodar un bonsai de la forma que una persona externa quiera modificarlo.
+-la funcion modificar_nodo no funcniona correctamente y no hay mas funciones
+
 ### Cosas implementadas y no implementadas :white_check_mark: :x:
 
-* <Nombre item pauta<sub>1</sub>>: Hecha completa
-* <Nombre item pauta<sub>2</sub>>: Me faltó hacer <insertar qué cosa faltó>
-    * <Nombre subitem pauta<sub>2.1</sub>>: Hecha completa 
-    * <Nombre subitem pauta<sub>2.2</sub>>: Me faltó hacer <insertar qué cosa faltó>
-    * ...
-* <Nombre item pauta<sub>3</sub>>: Me faltó hacer <insertar qué cosa faltó>
-* ...
-* <Nombre item pauta<sub>n</sub>>: Me faltó hacer <insertar qué cosa faltó>
+Explicación: mantén el emoji correspondiente, de manera honesta, para cada item. Si quieres, también puedes agregarlos a los títulos:
+- ❌ si **NO** completaste lo pedido
+- ✅ si completaste **correctamente** lo pedido
+- 🟠 si el item está **incompleto** o tiene algunos errores
+
+**⚠️⚠️NO BASTA CON SOLO PONER EL COLOR DE LO IMPLEMENTADO**,
+SINO QUE SE DEBERÁ EXPLICAR QUÉ SE REALIZO DETALLADAMENTE EN CADA ITEM.
+⚠️⚠️
+
+#### Menú: 13 pts (21,7%)
+##### ❌✅🟠 Consola
+##### ❌✅🟠 Menú de Inicio
+##### ❌✅🟠 Menú de Acciones
+##### ❌✅🟠 Modularización
+##### ❌✅🟠 PEP8
+
 
 ## Ejecución :computer:
-El módulo principal de la tarea a ejecutar es  ```archivo.py```. Además se debe crear los siguientes archivos y directorios adicionales:
+El módulo principal de la tarea a ejecutar es  `main.py`. Además se debe crear los siguientes archivos y directorios adicionales:
 1. ```archivo.ext``` en ```ubicación```
 2. ```directorio``` en ```ubicación```
 3. ...
@@ -37,8 +48,8 @@ El módulo principal de la tarea a ejecutar es  ```archivo.py```. Además se deb
 ### Librerías externas utilizadas
 La lista de librerías externas que utilicé fue la siguiente:
 
-1. ```librería_1```: ```función() / módulo```
-2. ```librería_2```: ```función() / módulo``` (debe instalarse)
+1. `utilidades.pyc`: `visualizar_bonsai()`
+2. `dccortarama.py`: `todas las funciones` (lo importe en el main.py)
 3. ...
 
 ### Librerías propias
@@ -91,3 +102,6 @@ Lo importante es que expliquen qué hace la función y que si saben que alguna p
 
 Para realizar mi tarea saqué código de:
 1. \<link de código>: este hace \<lo que hace> y está implementado en el archivo <nombre.py> en las líneas <número de líneas> y hace <explicación breve de que hace>
+
+## Descuentos
+La guía de descuentos se encuentra [link](https://github.com/IIC2233/Syllabus/blob/main/Tareas/Bases%20Generales%20de%20Tareas%20-%20IIC2233.pdf).
