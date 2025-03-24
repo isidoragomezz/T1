@@ -48,23 +48,22 @@ El módulo principal de la tarea a ejecutar es  `main.py`. Además se debe crear
 ### Librerías externas utilizadas
 La lista de librerías externas que utilicé fue la siguiente:
 
-1. `utilidades.pyc`: `visualizar_bonsai()`
+1. `utilidades.pyc`: `visualizar_bonsai()` (lo importe en el dccortarama)
 2. `dccortarama.py`: `todas las funciones` (lo importe en el main.py)
-3. ...
+3. `sys`           : `sys.exit()` (importado en el main.py)
 
 ### Librerías propias
 Por otro lado, los módulos que fueron creados fueron los siguientes:
 
-1. ```librería_1```: Contiene a ```ClaseA```, ```ClaseB```, (ser general, tampoco es necesario especificar cada una)...
-2. ```librería_2```: Hecha para <insertar descripción **breve** de lo que hace o qué contiene>
-3. ...
+1. pass
 
 ## Supuestos y consideraciones adicionales :thinking:
 Los supuestos que realicé durante la tarea son los siguientes:
 
-1. <Descripción/consideración 1 y justificación del por qué es válido/a> 
-2. <Descripción/consideración 2 y justificación del por qué es válido/a>
-3. ...
+1. utilice un supuesto en linea 31 donde en `clase_bonsai= dccortaramas.Bonsai("victor", 10, 27, [])` y mi suespuesto es `"victor", 10, 27, []` en el main.py.
+2. utilice un supuesto en linea 35 donde en `clase_bonsai.visualizar_bonsai("Vertical", True, False)` y mi supuesto es `"Vertical", True, False` en el main.py
+3. utilice un suepuesto en linea 38 donde en `clase_dcc.modificar_nodo(clase_bonsai, 3)` y supuesto es `clase_bonsai, 3` en el main.py
+4.utilice un supuesto en linea 41 donde en `clase_dcc.quitar_nodo(clase_bonsai, "4")` y mi supuesto es `clase_bonsai, "4"` en el main.py
 
 PD: <una última consideración (de ser necesaria) o comentario hecho anteriormente que se quiera **recalcar**>
 

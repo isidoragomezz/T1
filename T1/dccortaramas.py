@@ -69,44 +69,85 @@ class DCCortaRamas:
         
     def quitar_nodo(self, bonsai: Bonsai, identificador: str) -> str:
         cont= 0
+        true= 0
+        if identificador == 1:
+            print("No permitido")
+            return "No permitido"
         for i in bonsai.estructura:
             identificador_bonsai= i[0]
             booleano_bonsai= i[2]
             bebes_nodos= i[3]
-            print(i, identificador)
-
-            if identificador == "1": #si es 1 no se puede
-                print("No permitido")
-                return "No permitido"
-    
+            print(identificador)
             if identificador_bonsai == identificador: #si encontraba el identificador
                 if booleano_bonsai: #si se permite edicion
-                    del bonsai.estructura[cont] #elimino la lista 
-                    cont-= 1
-                    for v in bebes_nodos:
-                         if v != "0":
-                            v= int(v)
-                            del bonsai.estructura[v-1]
-                            identificador_padre, bool_no, bool_si, bebes_padres= bonsai.estructura[cont-1]
-                            cont_2= 0
-                            for i in bebes_padres:
-                                if i == str(cont):
-                                    bebes_padres[cont_2]= "0"
-                                cont_2+= 1
-                            print("Realizado")
-                            return "Realizado"
+                    true+= 1  
+                    print(f"True1: {true}")
+                    for i in bebes_nodos:  #recorro los bebes nodos para poder ver si se permite
+                        if i == 0: #si da todo true y si es 0 se puede por lo cual se le suma
+                                    true+= 1
+                                    print(f"True2: {true}")
+                        for x in bonsai.estructura:
+                            identificador_3= x[0]
+                            #print(identificador, identificador_3, "probando los identificadores")
+                            bool_bebe_nodo= x[2]
+                            if i == identificador_3: #reviso los dos bebes nodos y los buscos en bonsai
+                                if bool_bebe_nodo: 
+                                    true+= 1    
+                                    print(f"True3: {true}") 
+                    print(f"Truefinal: {true}")
+    
+                    if true == 3: #al ser 3 se puede decir q es realizable el quitarle el nodo
+                        print(bonsai.estructura[identificador])
+                        #del bonsai.estructura[cont] #elimino la lista 
+                        cont-= 1
+                        for v in bebes_nodos:
+                            if v != "0":
+                                v= int(v)
+                                print(bonsai.estructura[v-1])
+                                del bonsai.estructura[v-1]
+                                identificador_padre, bool_no, bool_si, bebes_padres= bonsai.estructura[cont-1]
+                                cont_2= 0
+                                for i in bebes_padres:
+                                    if i == str(cont):
+                                        bebes_padres[cont_2]= "0"
+                                    cont_2+= 1
+                                print("Realizado")
+                                print(bonsai.estructura)
+                                return "Realizado"
+                    elif true != 3:
+                        print("No permitido")
+                        return "No permitido"
                 elif not booleano_bonsai:
                     print("No permitido")
                     return "No permitido"
-
         return "No encontrado"
 
     def es_simetrico(self, bonsai: Bonsai) -> bool:
-        for i in bonsai.estructura:
-            if len(bonsai.estructura) == 1:
-                return True
-            
-
+        simetria_nodos= True
+        if len(bonsai.estructura) <= 3:
+            for i in range (len(bonsai.estructura)):
+                if (i+1) < (len(bonsai.estructura)-1):
+                    if i != 0:
+                        par= bonsai.estructura[i][1:2]
+                        impar= bonsai.estructura[i+1][1:2]
+                        if par != impar:
+                            simetria_nodos= False
+        else:
+            diccionario= {}
+            for v in bonsai.estructura:
+                ident= v[0]
+                bebes= v[3]
+                if ident not in diccionario:
+                    diccionario[ident]={}
+                for bebe in bebes:
+                    if bebe != "0":
+                        if bebe not in diccionario:
+                            diccionario[bebe]= {}
+                        diccionario[ident][bebe]= diccionario[bebe]
+                    else:
+                        diccionario[ident]["X"]= {}
+                
+        return simetria_nodos
 
     def emparejar_bonsai(self, bonsai: Bonsai) -> list:
         pass
