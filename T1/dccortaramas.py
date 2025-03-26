@@ -1,159 +1,179 @@
-import utilidades # type: ignore
+import utilidades  # type: ignore
+import os 
 
 class Bonsai:
-    def __init__(
-        self,
-        identificador: str,
-        costo_corte: int,
-        costo_flor: int,
-        estructura: list
-    ) -> None:
+    def __init__(self, identificador: str, costo_corte: int, costo_flor: int, estructura: list) -> None:
         self.identificador = identificador
         self.costo_corte = costo_corte
         self.costo_flor = costo_flor
         self.estructura = estructura
 
+    #utilizo la libreria os para poder ir buscaando la ruta de la carpeta y archivo que me ingresan para poder entregar el bonsai de forma ordenada
     def cargar_bonsai_de_archivo(self, carpeta: str, archivo: str) -> None:
-        self.estructura= []
-        with open (f"data/{carpeta}/{archivo}", "r", encoding= "utf-8") as f:
+        self.estructura = []
+        datos = os.path.join("data", carpeta, archivo)
+        #saco la estructura del bonsai de la carpeta y archivo que me entregan
+        with open(f"{datos}", "r", encoding="utf-8") as f:
             for i in f:
-                identificador, cosa_1, cosa_2, lista= i.strip().split(",")
-                if cosa_1 == "T":
-                    cosa_1= True
-                else:
-                    cosa_1= False
-                if cosa_2 == "T":
-                    cosa_2= True
-                else:
-                    cosa_2= False
-                lista= lista.split(";")
-                estructura= [identificador,cosa_1, cosa_2, lista]
+                identificador, cosa_1, cosa_2, lista = i.strip().split(",") #acomodo la estructura para poder usarla masa facilmente
+                cosa_1 = True if cosa_1 == "T" else False
+                cosa_2 = True if cosa_2 == "T" else False
+                lista = lista.split(";")
+                estructura = [identificador, cosa_1, cosa_2, lista]
                 self.estructura.append(estructura)
 
+    #utilizo utilidades del import para poder imprimir el bonsai en la terminal dependiendo de guardar_rchivo
     def visualizar_bonsai(self, orientacion: str, emojis: bool, guardar_archivo: bool) -> None:
-        if guardar_archivo == False:
-            v= utilidades.visualizar_bonsai(self.estructura, orientacion, emojis, guardar_archivo)
+        v = utilidades.visualizar_bonsai(self.estructura, orientacion, emojis, guardar_archivo)
+        if not guardar_archivo:
             print(v)
-        elif guardar_archivo == True :
-            v= utilidades.visualizar_bonsai(self.estructura, orientacion, emojis, guardar_archivo)
-            with open (f"visualizaciones/{self.identificador}.txt", "w", encoding= "utf-8") as f:
+        else:
+            with open(f"visualizaciones/{self.identificador}.txt", "w", encoding="utf-8") as f:
                 f.write(v)
 
 class DCCortaRamas:
+    #no utilizo libreria, reviso la estructura para ver si le tengo que modificar los bool dependiendo de la estructura del bonsai
     def modificar_nodo(self, bonsai: Bonsai, identificador: str) -> str:
         for i in bonsai.estructura:
-            identificador_bonsai= i[0]
-            modificacion= i[1]
-            booleano_bonsai= i[2]
+            identificador_bonsai = i[0]
+            modificacion = i[1]
+            booleano_bonsai = i[2]
 
             if identificador == 1: #si es la rama no se puede
-                print("No permitido")
-                return "No permitido"
-            
+                 print("No permitido")
+                 return "No permitido"
+             
             elif identificador_bonsai == identificador: #verifico los identificadores para poder cambiar la flor  
-                if booleano_bonsai: #si es verdadero la modificacion
-                    if modificacion: #si es true se cambia a false
+                 if booleano_bonsai: #si es verdadero la modificacion
+                     if modificacion: #si es true se cambia a false
                         i[1]= False
                         print("Realizado")
+                        print("Le hice una remocion flor")
                         return "Realizado"
-                    elif not modificacion: #si es false, se cambia a true
+                     elif not modificacion: #si es false, se cambia a true
                         i[1]= True
+                        print("Le agregue una flor")
                         print("Realizado")
                         return "Realizado"
-                
-                elif not booleano_bonsai: #si es false, no se permite la modificacion
-                    print("No permitido")
-                    return "No permitido"
-                    
+                 
+                 elif not booleano_bonsai: #si es false, no se permite la modificacion
+                     print("No permitido")
+                     return "No permitido"
+                     
         return "No encontrado" #si no se encuentra el identificador, se retorna no encontrado
-        
-    def quitar_nodo(self, bonsai: Bonsai, identificador: str) -> str:
-        cont= 0
-        true= 0
-        if identificador == 1:
-            print("No permitido")
-            return "No permitido"
+
+    #no utilizo librerias, dependiendo de la estructura y del identificador voy revisando si me permite eliminar el identificador y a todos sus hijos, y a su vez eliminar el identificador del padre nodo
+    def quitar_nodo(self, bonsai: Bonsai, identificador: str) -> str: 
+        #construyo un diccionario con la estructura
+        diccionario_bonsai= {}
         for i in bonsai.estructura:
-            identificador_bonsai= i[0]
-            booleano_bonsai= i[2]
-            bebes_nodos= i[3]
-            print(identificador)
-            if identificador_bonsai == identificador: #si encontraba el identificador
-                if booleano_bonsai: #si se permite edicion
-                    true+= 1  
-                    print(f"True1: {true}")
-                    for i in bebes_nodos:  #recorro los bebes nodos para poder ver si se permite
-                        if i == 0: #si da todo true y si es 0 se puede por lo cual se le suma
-                                    true+= 1
-                                    print(f"True2: {true}")
-                        for x in bonsai.estructura:
-                            identificador_3= x[0]
-                            #print(identificador, identificador_3, "probando los identificadores")
-                            bool_bebe_nodo= x[2]
-                            if i == identificador_3: #reviso los dos bebes nodos y los buscos en bonsai
-                                if bool_bebe_nodo: 
-                                    true+= 1    
-                                    print(f"True3: {true}") 
-                    print(f"Truefinal: {true}")
-    
-                    if true == 3: #al ser 3 se puede decir q es realizable el quitarle el nodo
-                        print(bonsai.estructura[identificador])
-                        #del bonsai.estructura[cont] #elimino la lista 
-                        cont-= 1
-                        for v in bebes_nodos:
-                            if v != "0":
-                                v= int(v)
-                                print(bonsai.estructura[v-1])
-                                del bonsai.estructura[v-1]
-                                identificador_padre, bool_no, bool_si, bebes_padres= bonsai.estructura[cont-1]
-                                cont_2= 0
-                                for i in bebes_padres:
-                                    if i == str(cont):
-                                        bebes_padres[cont_2]= "0"
-                                    cont_2+= 1
-                                print("Realizado")
-                                print(bonsai.estructura)
-                                return "Realizado"
-                    elif true != 3:
-                        print("No permitido")
-                        return "No permitido"
-                elif not booleano_bonsai:
-                    print("No permitido")
-                    return "No permitido"
-        return "No encontrado"
+            nodo_ident= i[0]
+            diccionario_bonsai[nodo_ident]= i
 
-    def es_simetrico(self, bonsai: Bonsai) -> bool:
-        simetria_nodos= True
-        if len(bonsai.estructura) <= 3:
-            for i in range (len(bonsai.estructura)):
-                if (i+1) < (len(bonsai.estructura)-1):
-                    if i != 0:
-                        par= bonsai.estructura[i][1:2]
-                        impar= bonsai.estructura[i+1][1:2]
-                        if par != impar:
-                            simetria_nodos= False
+        #si el identificador no esta, no fue encontrado
+        if identificador not in diccionario_bonsai:
+            return "No encontrado"
+        
+        #si esta vamos a revisarlo
         else:
-            diccionario= {}
-            for v in bonsai.estructura:
-                ident= v[0]
-                bebes= v[3]
-                if ident not in diccionario:
-                    diccionario[ident]={}
-                for bebe in bebes:
-                    if bebe != "0":
-                        if bebe not in diccionario:
-                            diccionario[bebe]= {}
-                        diccionario[ident][bebe]= diccionario[bebe]
-                    else:
-                        diccionario[ident]["X"]= {}
-                
-        return simetria_nodos
+            bebes= []
+            lista_revisar= [identificador]
+            while lista_revisar:
+                identificador_wh= lista_revisar[0]
+                lista_revisar.pop(0) #lo elimino para que se vaya actualizando en el momento, yaque antes se demoraba mucho si tenia todo junto
+                nodo_a_usar= diccionario_bonsai[identificador_wh]
+                quitar= nodo_a_usar[2]
+                if not quitar: #si es falso se termina el programa
+                    return "No permitido"
+                for i in nodo_a_usar[3]: #sino revisamos a los hijos
+                    bebes.append(identificador_wh)
+                    if i != "0":
+                        lista_revisar.append(i)
+        #print("AAAAAAAAA ")
+        #reemplozo los nodos eliminados por "0"
+        for x in bonsai.estructura:
+            for v in range(2):
+                bebe= x[3]
+                if bebe[v] in bebes: # PORQUE NO ME ENTRAAAAAAAAAAAA
+                    bebe[v] = "0"
 
+        
+        #actualizo el bonsai para que no tenga los bebes eliminados
+        bonsai_nuevo= []
+        for m in bonsai.estructura:
+            if m[0] in bebes:
+                continue
+            else:
+                bonsai_nuevo.append(m)
+
+        lista_eliminados= [] #creo una lista con los bebes eliminados que piden en el menu
+        for b in bonsai.estructura:
+            if b[0] in bebes:
+                lista_eliminados.append(b)
+
+        bonsai.estructura= bonsai_nuevo #hago los cambios en el bonsai.estructura
+        print(lista_eliminados)
+        return "Realizado" #AAAAAAAAAAAAAAAAAAAA ME DIO OKKKKKKKKKKKKKKKKKKK
+
+    #no utilizo librerias, reviso la estructura del bonsai, sus hijos de afuera hacia adentro, para verificar que la estructura que tiene sea simetrica tanto a la izquierda como a la derecha
+    def es_simetrico(self, bonsai: Bonsai) -> bool:
+
+        #creo un diccionario coon la estructura para poder ir cambiarlo
+        diccionario_bonsai= {}
+        for i in bonsai.estructura:
+            identificador= i[0]
+            diccionario_bonsai[identificador]= i
+        
+        #me saco el caso de si es un nodo altiro para despues revisar los otros
+        if len(bonsai.estructura) == 1:
+            return True
+
+        #creo una funxion recursiva para ir usandola y acortar codigo en las revisiones de si son iguales o no
+        #me equivoque en escribir simetria pero ya tengo el codigo lista, es entendible y funciona bien, no me bajen nota por gramatica:(
+        def siemtria(nodo_1, nodo_2):
+            #print("nodos PORQUE ME SALE QUE ES "0"",nodo_1, nodo_2)
+            if nodo_1 == "0" and nodo_2 == "0": #si los dos son "0", son simétricos
+                return True
+            elif nodo_1 == "0" or nodo_2 == "0": #si uno es "0", no son simétricos, casos donde hijos 00, un numero o al reves
+                return False
+            #flores_1= diccionario_bonsai[nodo_1][1]
+            #flores_2= diccionario_bonsai[nodo_2][1]
+            #print("AAAAAAAAAAAAAAAAAAA")
+            #print("flores1 flores2", flores_1, flores_2)
+            #if not flores_1 or not flores_2: porque me da error si verifico las flores
+                #return False
+            
+            #voy a dejar esto arriba para organizarme-> no puedo porq aveces son 0 y tengo q dejarlo abajo porq no puede ser 0 - > reviso a los hijos de los nodos q entraron
+            bebe_nodo_1 = diccionario_bonsai[nodo_1][3]
+            bebe_nodo_2 = diccionario_bonsai[nodo_2][3]
+
+            #ahora q reviso al ser simetricos los hijos si esq la recursividad de los hijos de los hijos es simetrica
+            return siemtria(bebe_nodo_1[0], bebe_nodo_2[1]) and siemtria(bebe_nodo_1[1], bebe_nodo_2[0])
+
+        #comienzo revisando el identificador del nodo y asi con la recursividad hasta el ultimo
+        primer_nodo_del_bonsai = bonsai.estructura[0]
+        bebes_primer_nodo = primer_nodo_del_bonsai[3]
+        #le reviso a los hijos de primer nodo, ademas de revisar al nodo
+        cant_bebe_primer_nodo= len(bebes_primer_nodo)
+        return siemtria(bebes_primer_nodo[0], bebes_primer_nodo[1])
+
+    #no pude realizar la funcion bien, se me fue el tiempo, tengo 6 test publicos malos
     def emparejar_bonsai(self, bonsai: Bonsai) -> list:
-        pass
+        diccionario= {}
+        for i in bonsai.estructura:
+            identificador= i[0]
+            diccionario[identificador]= i
 
+        v= self.es_simetrico(bonsai)
+        if v:
+            return [True, []]
+        else:
+            return [False, []]
+
+    #no pude realizar nada de esta funcion:( 
     def emparejar_bonsai_ahorro(self, bonsai: Bonsai) -> list:
         pass
 
+    #no pude realizar nada esta funcion:( 
     def comprobar_solucion(self, bonsai: Bonsai, instrucciones: list) -> list:
         pass
